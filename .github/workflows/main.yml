@@ -1,0 +1,46 @@
+name: Dart Unit Tests Summary
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-summary:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Aluno
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: aluno_code # Baixa o código do aluno numa pasta separada
+
+      - name: Checkout Testes Oficiais
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: oficial_code # Baixa o seu código original em outra pasta
+
+      - name: Restaurar Testes Oficiais
+        run: |
+          # Remove os testes que o aluno pode ter alterado
+          rm -rf aluno_code/test
+          # Copia os seus testes oficiais para dentro da pasta do aluno
+          cp -r oficial_code/test aluno_code/test
+          # (Opcional) Se houver um arquivo de pontuação ou config, restaure também
+          # cp oficial_code/pubspec.yaml aluno_code/pubspec.yaml
+
+      - name: Run Tests
+        working-directory: ./aluno_code
+        run: |
+          dart pub get
+          dart test --machine > machine_results.json || true
+
+      - name: Show Summary
+        working-directory: ./aluno_code
+        run: |
+          # ... (aquela mesma lógica do grep que fizemos antes)
+          PASSED=$(grep -c '"result":"success"' machine_results.json || echo "0")
+          FAILED=$(grep -c '"result":"failure"' machine_results.json || echo "0")
+          echo "Relatório: $PASSED aprovados / $FAILED reprovados."
+s
