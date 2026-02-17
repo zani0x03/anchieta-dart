@@ -1,6 +1,6 @@
 // 1. Soma
 num somar(num a, num b){
-  return 0;
+  return a + b;
 }
 
 // 2. Par
