@@ -13,34 +13,57 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-          path: aluno_code # Baixa o código do aluno numa pasta separada
+          path: aluno_code
 
       - name: Checkout Testes Oficiais
         uses: actions/checkout@v4
         with:
           ref: main
-          path: oficial_code # Baixa o seu código original em outra pasta
+          path: oficial_code
 
       - name: Restaurar Testes Oficiais
         run: |
-          # Remove os testes que o aluno pode ter alterado
           rm -rf aluno_code/test
-          # Copia os seus testes oficiais para dentro da pasta do aluno
           cp -r oficial_code/test aluno_code/test
-          # (Opcional) Se houver um arquivo de pontuação ou config, restaure também
-          # cp oficial_code/pubspec.yaml aluno_code/pubspec.yaml
 
       - name: Run Tests
         working-directory: ./aluno_code
         run: |
-          dart pub get
-          dart test --machine > machine_results.json || true
+          flutter test --machine > machine_results.json || true
 
       - name: Show Summary
         working-directory: ./aluno_code
         run: |
-          # ... (aquela mesma lógica do grep que fizemos antes)
-          PASSED=$(grep -c '"result":"success"' machine_results.json || echo "0")
-          FAILED=$(grep -c '"result":"failure"' machine_results.json || echo "0")
-          echo "Relatório: $PASSED aprovados / $FAILED reprovados."
-s
+          # 1. Filtra os resultados visíveis
+          grep '"type":"testDone"' machine_results.json | grep '"hidden":false' > filtered.txt || true
+
+          # 2. Conta e salva o número direto em arquivos temporários
+          grep -c '"result":"success"' filtered.txt > p.txt || echo "0" > p.txt
+          grep -c '"result":"failure"' filtered.txt > f.txt || echo "0" > f.txt
+          grep -c '"result":"error"' filtered.txt > e.txt || echo "0" > e.txt
+
+          # 3. Lê os arquivos para variáveis (Garante que não fiquem vazias)
+          PASSED=$(cat p.txt)
+          FAILED=$(cat f.txt)
+          ERRORS=$(cat e.txt)
+
+          # 4. Soma usando expr (o modo mais compatível do Linux)
+          # Se a variável estiver vazia, o '0' ali garante a conta
+          REPROVADOS=$(expr ${FAILED:-0} + ${ERRORS:-0})
+          TOTAL=$(expr ${PASSED:-0} + $REPROVADOS)
+
+          echo "------------------------------------------"
+          echo "RESUMO FINAL"
+          echo "------------------------------------------"
+          echo "Total de exercícios: $TOTAL"
+          echo "Passou: ${PASSED:-0}"
+          echo "Falhou: $REPROVADOS"
+          echo "------------------------------------------"
+
+          # 5. Verificação de erro
+          if [ "$REPROVADOS" -gt 0 ]; then
+            echo "Status: REPROVADO"
+            exit 1
+          else
+            echo "Status: APROVADO"
+          fi
