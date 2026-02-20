@@ -1,49 +1,66 @@
 // 1. Soma
+import 'dart:ffi';
+
 num somar(num a, num b){
-  return 0;
+  return a + b;
 }
 
 // 2. Par
 bool isPar(int n) {
-  return false;
+  return ((n % 2) == 0 ? true : false);
 }
 
 // 3. Maior de idade
 bool podeEntrar(int idade){
-  return false;
+  return idade >= 18;
 }
 
 // 4. Celsius para Fahrenheit
 double converter(double c){
-  return 0.0;
+  var result = c * 1.8 + 32.0;
+  return result;
 }
 
 // 5. Saudação
 String saudar(String nome){
-  return "";
+  return "Olá, ${nome}!";
 }
 
 // 6. Média
 double calcularMedia(List<double> notas) {
-  return 0.0;
+  return notas.isNotEmpty ? notas.reduce((value, element) => (
+    ( value + element ) / 2
+  )).ceilToDouble() : 0;
 }
 
 // 7. Filtrar Maiores
 List<int> buscarMaiores(List<int> numeros, int corte){
-  return [];
+  return numeros.where((element) => element > corte).toList();
 }
 
 // 8. Nulos (Null Safety)
 int tamanhoTexto(String? texto){
-  return 0;
+  if (texto == null) return 0;
+  
+  var counter = 0; 
+  
+  for (var letterIndex in texto.runes) {
+    counter++; 
+  }
+
+  return counter;
 }
 
 // 9. Carrinho com Desconto
 double fecharPedido(List<double> precos){
-  return 0.0;
+  var result = precos.reduce((value, element) => (( value + element )));
+  
+  return result > 500 ? result * 0.85 : result * 0.95;
 }
 
 // 10. Busca Case Insensitive
 bool contemNome(List<String> nomes, String busca){
-  return false;
+  List lwcNames = nomes.map((name) => name.toLowerCase()).toList();
+
+  return lwcNames.contains(busca.toLowerCase());
 }
