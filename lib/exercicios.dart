@@ -33,19 +33,32 @@ bool podeEntrar(int idade){
 
 // 4. Celsius para Fahrenheit
 double converter(double c){
-  print('$c°C equivale a $converter°F');
+  print('$c°C equivale a ${(c * 1.8) + 32}°F');
   return (c * 1.8) + 32;
-}
 
+}
 
 
 // 5. Saudação
 String saudar(String nome){
+  print('Olá, $nome!');
   return ('Olá, $nome!');
 }
 
 // 6. Média
 double calcularMedia(List<double> notas) {
+    int soma;
+
+    for (int i = 0; i < 5; i++) {
+      soma = soma + 1;
+    }
+      // 1. Somar os elementos usando fold
+    double soma = notas.fold(0, (anterior, atual) => anterior + atual);
+    
+    // 2. Calcular a média
+    double media = soma / notas.length;
+    
+    print('A média é: $media'); // Resultado: 7.75
   return 0.0;
 }
 
