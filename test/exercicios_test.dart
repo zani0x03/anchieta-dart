@@ -70,6 +70,5 @@ void main() {
     expect(contemNome(lista, "ana"), true);
     expect(contemNome(lista, "BETO"), true);
     expect(contemNome(lista, "Zezé"), false);
-    print('\n --');
   });
 }
