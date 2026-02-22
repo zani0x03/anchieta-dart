@@ -5,7 +5,6 @@ num somar(num a, num b){
 
 }
 
-
 // 2. Par
 bool isPar(int n) {
   if (n % 2 == 0) {
@@ -37,7 +36,6 @@ double converter(double c){
   return (c * 1.8) + 32;
 
 }
-
 
 // 5. Saudação
 String saudar(String nome){
@@ -85,7 +83,7 @@ List<int> buscarMaiores(List<int> numeros, int corte){
 // 8. Nulos (Null Safety)
 int tamanhoTexto(String? texto){
   if (texto == null) {
-      print('Esta é uma palvra nula! (${texto?.length ?? 0})');
+      print('Esta é uma palavra nula! (${texto?.length ?? 0})');
       return texto?.length ?? 0;
   } else {
       print('O tamanho de $texto é ${texto?.length ?? 0}');
@@ -96,10 +94,38 @@ int tamanhoTexto(String? texto){
 
 // 9. Carrinho com Desconto
 double fecharPedido(List<double> precos){
-  return 0.0;
+  double totalBruto = 0;
+  for (var preco in precos) {
+    totalBruto += preco;
+  }
+
+  double totalComDesconto;
+  if (totalBruto > 500) {
+    totalComDesconto = totalBruto * 0.85;
+    print('O valor total com desconto é de $totalComDesconto reais');
+  } else {
+    totalComDesconto = totalBruto * 0.95;
+    print('O valor total com desconto é de $totalComDesconto reais');
+  }
+
+  return totalComDesconto;
 }
+
 
 // 10. Busca Case Insensitive
 bool contemNome(List<String> nomes, String busca){
+for (var nome in nomes) {
+    // Comparamos ambos em minúsculo para ignorar a diferença de caixa
+    if (nome.toLowerCase() == busca.toLowerCase()) {
+      print('O nome "$busca" foi encotrado na lista!');
+      return true; // Se encontrou, retorna true e encerra a função
+    } else {
+      // O else aqui é opcional, pois se não for igual, 
+      // apenas continuamos para o próximo item do loop.
+      continue; 
+    }
+  }
+  
+  print('O nome "$busca" não foi encontrado na lista!');
   return false;
 }

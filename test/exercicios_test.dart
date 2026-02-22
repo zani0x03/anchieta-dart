@@ -65,11 +65,11 @@ void main() {
   });
 
   test('10. Deve buscar nome na lista (Case Insensitive)', () {
-    //print('10. Buscar nome na lista (Case Insensitive):');
+    print('10. Buscar nome na lista (Case Insensitive):');
     var lista = ["Ana", "Beto", "Caio"];
     expect(contemNome(lista, "ana"), true);
     expect(contemNome(lista, "BETO"), true);
     expect(contemNome(lista, "Zezé"), false);
-    //print('\n --');
+    print('\n --');
   });
 }
