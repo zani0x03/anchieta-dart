@@ -25,7 +25,11 @@ String saudar(String nome) {
 
 // 6. Média
 double calcularMedia(List<double> notas) {
-  return notas.isEmpty ? 0.0 : notas.reduce((a, b) => a + b) / notas.length;
+  if (notas.isEmpty) {
+    return 0.0;
+  }
+  double soma = notas.reduce((a, b) => a + b);
+  return soma / notas.length;
 }
 
 // 7. Filtrar Maiores
@@ -40,8 +44,15 @@ int tamanhoTexto(String? texto) {
 
 // 9. Carrinho com Desconto
 double fecharPedido(List<double> precos) {
-  return precos.reduce((a, b) => a + b) *
-      (precos.reduce((a, b) => a + b) > 500 ? 0.85 : 0.95);
+  if (precos.isEmpty) return 0.0;
+
+  double total = precos.reduce((a, b) => a + b);
+
+  if (total > 500) {
+    return total * 0.85;
+  } else {
+    return total * 0.95;
+  }
 }
 
 // 10. Busca Case Insensitive
