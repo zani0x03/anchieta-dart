@@ -43,7 +43,7 @@ void main() {
   test('9. Deve calcular pedido com descontos progressivos', () {
     // Regra: > 500 desc 15%, caso contrário 5%
     expect(fecharPedido([100, 400, 100]), 510.0); // 600 - 15%
-    expect(fecharPedido([100, 100]), 190.0);     // 200 - 5%
+    expect(fecharPedido([100, 100]), 190.0); // 200 - 5%
   });
 
   test('10. Deve buscar nome na lista (Case Insensitive)', () {
