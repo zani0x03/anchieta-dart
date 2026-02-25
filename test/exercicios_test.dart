@@ -28,6 +28,7 @@ void main() {
 
   test('6. Deve calcular a média da lista', () {
     expect(calcularMedia([10, 8, 6]), 8.0);
+    expect(calcularMedia([]), 0.0);
   });
 
   test('7. Deve filtrar números maiores que o corte', () {
