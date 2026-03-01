@@ -2,6 +2,86 @@ import 'package:anchieta_dart/exercicios.dart';
 import 'package:test/test.dart';
 
 void main() {
+
+  int somar (int n1, int n2){
+    return n1 + n2;
+  }
+
+  bool isPar(int n1){
+    if (n1 % 2 == 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool podeEntrar(int idade){
+    if (idade >= 18){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  double converter(double temperatura){
+    return (temperatura * 1.8) + 32;
+  }
+
+  String saudar (String nome){
+    return ("Olá, " + nome + "!");
+  }
+
+  double calcularMedia(List numeros){
+    double soma = 0;
+    if (numeros.isEmpty){
+      return 0.0;
+    }
+    for (var i = 0; i < numeros.length; i++){
+      soma = soma + numeros[i];
+    }
+    return soma/numeros.length;
+  }
+
+  List buscarMaiores(List numeros, int corte){
+    List maiores = [];
+    for (int i=0;i<numeros.length;i++){
+      if(numeros[i] > corte){
+        maiores.add(numeros[i]);
+      }
+    }
+    return maiores;
+  }
+
+  int tamanhoTexto(String? palavra){
+    if (palavra == null){
+      return 0;
+    } else {
+      return palavra.length;
+    }
+  }
+
+  double fecharPedido(List pedido){
+    double somapedido = 0;
+    for (int i = 0; i < pedido.length; i++){
+      somapedido = somapedido + pedido[i];
+    }
+    if (somapedido >= 500){
+      somapedido = somapedido - (somapedido * 0.15);
+    } else{
+      somapedido = somapedido - (somapedido * 0.05);
+    }
+    return somapedido;
+  }
+
+  bool contemNome(List nomes, String nome){
+    for (int i = 0; i < nomes.length; i++){
+      if (nomes[i].toString().toUpperCase() == nome.toUpperCase()){
+        return true;
+      }
+    }
+    return false;
+  }
+
   test('1. Deve somar dois números', () {
     expect(somar(10, 5), 15);
     expect(somar(-2, 2), 0);
