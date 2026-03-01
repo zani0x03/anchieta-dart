@@ -4,26 +4,35 @@ import 'package:test/test.dart';
 void main() {
   test('1. Deve somar dois números', () {
     expect(somar(10, 5), 15);
+    print(somar(10, 5));
     expect(somar(-2, 2), 0);
+    print(somar(-2, 2));
   });
 
   test('2. Deve verificar se é par', () {
     expect(isPar(4), true);
+    print(isPar(4));
     expect(isPar(7), false);
+    print(isPar(7));
   });
 
   test('3. Deve validar maioridade', () {
     expect(podeEntrar(18), true);
+    print(podeEntrar(18));
     expect(podeEntrar(17), false);
+    print(podeEntrar(17));
   });
 
   test('4. Deve converter Celsius para Fahrenheit', () {
     expect(converter(0), 32.0);
+    print(converter(0));
     expect(converter(100), 212.0);
+    print(converter(100));
   });
 
   test('5. Deve saudar o usuário', () {
     expect(saudar("Leo"), "Olá, Leo!");
+    print(saudar("Leo"));
   });
 
   test('6. Deve calcular a média da lista', () {
@@ -43,7 +52,7 @@ void main() {
   test('9. Deve calcular pedido com descontos progressivos', () {
     // Regra: > 500 desc 15%, caso contrário 5%
     expect(fecharPedido([100, 400, 100]), 510.0); // 600 - 15%
-    expect(fecharPedido([100, 100]), 190.0);     // 200 - 5%
+    expect(fecharPedido([100, 100]), 190.0); // 200 - 5%
   });
 
   test('10. Deve buscar nome na lista (Case Insensitive)', () {
