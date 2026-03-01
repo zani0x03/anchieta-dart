@@ -1,49 +1,54 @@
-// 1. Soma
-num somar(num a, num b){
-  return 0;
+int somar(int a, int b) {
+  return a + b;
 }
 
-// 2. Par
-bool isPar(int n) {
-  return false;
+bool isPar(int numero) {
+  return numero % 2 == 0;
 }
 
-// 3. Maior de idade
-bool podeEntrar(int idade){
-  return false;
+bool podeEntrar(int idade) {
+  return idade >= 18;
 }
 
-// 4. Celsius para Fahrenheit
-double converter(double c){
-  return 0.0;
+double converter(double celsius) {
+  return (celsius * 9 / 5) + 32;
 }
 
-// 5. Saudação
-String saudar(String nome){
-  return "";
+String saudar(String nome) {
+  return "Olá, $nome!";
 }
 
-// 6. Média
-double calcularMedia(List<double> notas) {
-  return 0.0;
+double calcularMedia(List<double> numeros) {
+  if (numeros.isEmpty) {
+    return 0.0;
+  }
+
+  double soma = numeros.reduce((a, b) => a + b);
+  return soma / numeros.length;
 }
 
-// 7. Filtrar Maiores
-List<int> buscarMaiores(List<int> numeros, int corte){
-  return [];
+List<int> buscarMaiores(List<int> numeros, int corte) {
+  return numeros.where((n) => n > corte).toList();
 }
 
-// 8. Nulos (Null Safety)
-int tamanhoTexto(String? texto){
-  return 0;
+int tamanhoTexto(String? texto) {
+  return texto?.length ?? 0;
 }
 
-// 9. Carrinho com Desconto
-double fecharPedido(List<double> precos){
-  return 0.0;
+double fecharPedido(List<double> valores) {
+  double total = valores.reduce((a, b) => a + b);
+
+  if (total > 500) {
+    return total * 0.85; // 15% desconto
+  } else if (total >= 200) {
+    return total * 0.95; // 5% desconto
+  }
+
+  return total;
 }
 
-// 10. Busca Case Insensitive
-bool contemNome(List<String> nomes, String busca){
-  return false;
+bool contemNome(List<String> nomes, String nomeBuscado) {
+  return nomes.any(
+    (n) => n.toLowerCase() == nomeBuscado.toLowerCase(),
+  );
 }
