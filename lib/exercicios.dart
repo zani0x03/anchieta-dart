@@ -6,7 +6,7 @@ num somar(num a, num b) {
 // 2. Par
 bool isPar(int n) {
   return n % 2 == 0;
-  // Alternativa: return n.isEven;
+
 }
 
 // 3. Maior de idade
@@ -17,7 +17,7 @@ bool podeEntrar(int idade) {
 // 4. Celsius para Fahrenheit
 double converter(double c) {
   return c * 9 / 5 + 32;
-  // ou: return (c * 1.8) + 32;
+ 
 }
 
 // 5. Saudação
@@ -44,13 +44,13 @@ List<int> buscarMaiores(List<int> numeros, int corte) {
   
 }
 
-// 8. Nulos (Null Safety)
+// 8. Nulos 
 int tamanhoTexto(String? texto) {
   return texto?.length ?? 0;
   
 }
 
-// 9. Carrinho com Desconto (interpretação comum do exercício)
+// 9. Carrinho com Desconto 
 double fecharPedido(List<double> precos) {
   if (precos.isEmpty) return 0.0;
   
